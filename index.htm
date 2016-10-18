@@ -2,7 +2,7 @@
 <html>
 <head>
   <title>Park It Here</title>
-  <!--<script type="text/javascript" src="/serveFile?filename=bolt.js"> setDebug(true); </script>-->
+  <script type="text/javascript" src="/serveFile?filename=bolt.js"> setDebug(true); </script>
   <script>
     function reserve(clicked_id){
       var space = document.getElementById(clicked_id).classList;
@@ -55,6 +55,7 @@
       margin: 0px 10px;
       cursor: pointer;
       transition: all 0.25s;
+      position: relative;
     }
     .space span{
       text-decoration: none;
@@ -102,27 +103,92 @@
             <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
             <path d="M0 0h24v24H0z" fill="none"/>
           </svg>
+          <span id="output-1" style="display:none">On</span>
         </a>
         <a id="2" class="space available" onclick="reserve(this.id)">
           <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" height="48" viewBox="0 0 24 24" width="48">
             <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
             <path d="M0 0h24v24H0z" fill="none"/>
           </svg>
+          <span id="output-2" style="display:none">On</span>
         </a>
         <a id="3" class="space available" onclick="reserve(this.id)">
           <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" height="48" viewBox="0 0 24 24" width="48">
             <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
             <path d="M0 0h24v24H0z" fill="none"/>
           </svg>
+          <span id="output-3" style="display:none">On</span>
         </a>
         <a id="4" class="space available" onclick="reserve(this.id)">
           <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" height="48" viewBox="0 0 24 24" width="48">
             <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
             <path d="M0 0h24v24H0z" fill="none"/>
           </svg>
+          <span id="output-4" style="display:none">On</span>
         </a>
 
       </div>
     </section>
+    <script>
+    var on = "Pin Val=0";
+    var off = "Pin Val=1";
+    (function(){
+      digitalRead(1,'output-1');
+      var x = document.getElementById('output-1').innerHTML;
+      if(x==on){
+        var space = document.getElementById('1').classList;
+        space.remove("available");space.add("occupied");
+        console.log("Car Parked at A");
+      }else if(x==off){
+        var space = document.getElementById('1').classList;
+        space.remove("occupied");space.add("available");
+        console.log("Car Left From A");
+      }
+      setTimeout(arguments.callee, 1000);
+    })();
+    (function(){
+      digitalRead(2,'output-2');
+      var x = document.getElementById('output-2').innerHTML;
+      if(x==on){
+        var space = document.getElementById('2').classList;
+        space.remove("available");space.add("occupied");
+        console.log("Car Parked at B");
+      }else if(x==off){
+        var space = document.getElementById('2').classList;
+        space.remove("occupied");space.add("available");
+        console.log("Car Left From B");
+      }
+      setTimeout(arguments.callee, 1000);
+    })();
+    (function(){
+      digitalRead(3,'output-3');
+      var x = document.getElementById('output-3').innerHTML;
+      if(x==on){
+        var space = document.getElementById('3').classList;
+        space.remove("available");space.add("occupied");
+        console.log("Car Parked at C");
+      }else if(x==off){
+        var space = document.getElementById('3').classList;
+        space.remove("occupied");space.add("available");
+        console.log("Car Left From C");
+      }
+      setTimeout(arguments.callee, 1000);
+    })();
+    (function(){
+      digitalRead(4,'output-4');
+      var x = document.getElementById('output-4').innerHTML;
+      if(x==on){
+        var space = document.getElementById('4').classList;
+        space.remove("available");space.add("occupied");
+        console.log("Car Parked at D");
+      }else if(x==off){
+        var space = document.getElementById('4').classList;
+        space.remove("occupied");space.add("available");
+        console.log("Car Left From D");
+      }
+      setTimeout(arguments.callee, 1000);
+    })();
+    </script>
 </body>
+
 </html>

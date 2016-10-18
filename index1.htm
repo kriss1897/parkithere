@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Park It Here</title>
+  <script type="text/javascript" src="/serveFile?filename=bolt.js"> setDebug(true); </script>
+  <script>
+    function reserve(clicked_id){
+      var space = document.getElementById(clicked_id).classList;
+      if(space.contains("occupied")||space.contains("in-route")){
+        alert("Already Occupied");
+      }
+      else{
+        space.remove("available");
+        space.add("in-route");
+      }
+      setTimeout( function reset(){
+        space.remove("in-route");
+        space.add("available");
+      },10000);
+    }
+  </script>
+  <style>
+    body{
+      overflow: none;
+      font-family: sans-serif;
+    }
+    html,body{
+      margin:0px;
+      padding:0px;
+    }
+    section.screen{
+      height: 100vh;
+      width: 100vw;
+      margin: 0px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: #fafafa;
+      align-items: center;
+    }
+    .parking{
+      display: flex;
+      flex-direction: row;
+      padding-bottom: 100px;
+    }
+    .space{
+      height: 200px;
+      border: 2px solid rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 150px;
+      border-radius: 5px;
+      margin: 0px 10px;
+      cursor: pointer;
+      transition: all 0.25s;
+      position: relative;
+    }
+    .space span{
+      text-decoration: none;
+    }
+    .space svg{
+      opacity: 0.3;
+    }
+    .space.occupied{
+      background: #c6584b;
+      border: 2px solid #c6584b;
+    }
+    .space.available{
+      background: #08e8ab;
+      border: 2px solid #08e8ab;
+    }
+    .space.in-route{
+      background: #f6d465;
+      border-color: transparent;
+    }
+    .space:hover{
+      box-shadow: 0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12);
+    }
+    span.message{
+      padding: 10px 40px;
+      border-radius: 5px;
+      margin: 0px 10px;
+    }
+  </style>
+</head>
+<body>
+    <!--<button onclick="digitalWrite(4,HIGH);">ON</button>
+    <button onclick="digitalWrite(4,LOW);">OFF</button>-->
+    <section class="screen">
+      <div>
+        <h1 style="font-weight:100;font-size:40px;padding-top:100px;text-align:center">Park It Here</h1>
+        <div class="info">
+          <span class="message" style="background:#08e8ab">Available</span>
+          <span class="message" style="background:#ff5252">Occupied</span>
+          <span class="message" style="background:#f6d465;">In Route</span>
+        </div>
+      </div>
+      <div class="parking">
+        <a id="1" class="space available" onclick="reserve(this.id)">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" height="48" viewBox="0 0 24 24" width="48">
+            <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+            <path d="M0 0h24v24H0z" fill="none"/>
+          </svg>
+          <span id="output-1" style="display:none">Pin Val=1</span>
+        </a>
+        <a id="2" class="space available" onclick="reserve(this.id)">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" height="48" viewBox="0 0 24 24" width="48">
+            <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+            <path d="M0 0h24v24H0z" fill="none"/>
+          </svg>
+          <span id="output-2" style="display:none">Pin Val=1</span>
+        </a>
+        <a id="3" class="space available" onclick="reserve(this.id)">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" height="48" viewBox="0 0 24 24" width="48">
+            <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+            <path d="M0 0h24v24H0z" fill="none"/>
+          </svg>
+          <span id="output-3" style="display:none">Pin Val=1</span>
+        </a>
+        <a id="4" class="space available" onclick="reserve(this.id)">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" height="48" viewBox="0 0 24 24" width="48">
+            <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
+            <path d="M0 0h24v24H0z" fill="none"/>
+          </svg>
+          <span id="output-4" style="display:none">Pin Val=1</span>
+        </a>
+      </div>
+    </section>
+    <script>
+    function park(id,index){
+      digitalRead(id,'output-'+index);
+      var x = document.getElementById('output-'+index).innerHTML;
+      var on = "Pin Val=0";
+      var off = "Pin Val=1";
+      console.log(index+" "+id);
+      if(x==on)
+      {
+        var space = document.getElementById(index).classList;
+        space.remove("available");
+        space.add("occupied");
+      }
+      else if(x==off)
+      {
+        var space = document.getElementById(index).classList;
+        space.remove("occupied");
+        space.add("available");
+      }
+    }
+    (function(){
+      var index = 1;
+      var id = 1;
+      park(id,index);
+      setTimeout(arguments.callee, 3000);
+    })();
+    (function(){
+      var index = 2;
+      var id = 2;
+      park(id,index);
+      setTimeout(arguments.callee, 3000);
+    })();
+    (function(){
+      var index = 3;
+      var id = 3;
+      park(id,index);
+      setTimeout(arguments.callee, 3000);
+    })();
+    (function(){
+      var index = 4;
+      var id = 4;
+      park(id,index);
+      setTimeout(arguments.callee, 3000);
+    })();
+    </script>
+</body>
+
+</html>
