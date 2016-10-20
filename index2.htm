@@ -3,22 +3,6 @@
 <head>
   <title>Park It Here</title>
   <script type="text/javascript" src="/serveFile?filename=bolt.js"> setDebug(true); </script>
-  <script>
-    function reserve(clicked_id){
-      var space = document.getElementById(clicked_id).classList;
-      if(space.contains("occupied")||space.contains("in-route")){
-        alert("Already Occupied");
-      }
-      else{
-        space.remove("available");
-        space.add("in-route");
-      }
-      setTimeout( function reset(){
-        space.remove("in-route");
-        space.add("available");
-      },10000);
-    }
-  </script>
   <style>
     body{
       overflow: none;
@@ -86,8 +70,6 @@
   </style>
 </head>
 <body>
-    <!--<button onclick="digitalWrite(4,HIGH);">ON</button>
-    <button onclick="digitalWrite(4,LOW);">OFF</button>-->
     <section class="screen">
       <div>
         <h1 style="font-weight:100;font-size:40px;padding-top:100px;text-align:center">Park It Here</h1>
@@ -103,73 +85,96 @@
             <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
             <path d="M0 0h24v24H0z" fill="none"/>
           </svg>
-          <span id="output-1" style="display:none">Pin Val=1</span>
+          <span id="output-1" style="display:none;position:absolute;bottom:-30px;">Pin Val=0</span>
         </a>
         <a id="2" class="space available" onclick="reserve(this.id)">
           <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" height="48" viewBox="0 0 24 24" width="48">
             <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
             <path d="M0 0h24v24H0z" fill="none"/>
           </svg>
-          <span id="output-2" style="display:none">Pin Val=1</span>
+          <span id="output-2" style="display:none;position:absolute;bottom:-30px;">Pin Val=0</span>
         </a>
         <a id="3" class="space available" onclick="reserve(this.id)">
           <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" height="48" viewBox="0 0 24 24" width="48">
             <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
             <path d="M0 0h24v24H0z" fill="none"/>
           </svg>
-          <span id="output-3" style="display:none">Pin Val=1</span>
+          <span id="output-3" style="display:none;position:absolute;bottom:-30px;">Pin Val=0</span>
         </a>
         <a id="4" class="space available" onclick="reserve(this.id)">
           <svg xmlns="http://www.w3.org/2000/svg" fill="#000000" height="48" viewBox="0 0 24 24" width="48">
             <path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/>
             <path d="M0 0h24v24H0z" fill="none"/>
           </svg>
-          <span id="output-4" style="display:none">Pin Val=1</span>
+          <span id="output-4" style="display:none;position:absolute;bottom:-30px;">Pin Val=0</span>
         </a>
+
       </div>
     </section>
     <script>
-    function park(id,index){
-      digitalRead(id,'output-'+index);
-      var x = document.getElementById('output-'+index).innerHTML;
-      var on = "Pin Val=0";
-      var off = "Pin Val=1";
-      console.log(index+" "+id);
-      if(x==on)
-      {
-        var space = document.getElementById(index).classList;
+    var on = "Pin Val=1";
+    var off = "Pin Val=0";
+    function reserve(clicked_id){
+      var space = document.getElementById(clicked_id).classList;
+      if(space.contains("occupied")||space.contains("in-route")){
+        alert("Already Occupied");
+      }
+      else{
         space.remove("available");
-        space.add("occupied");
+        space.add("in-route");
       }
-      else if(x==off)
-      {
-        var space = document.getElementById(index).classList;
-        space.remove("occupied");
+
+      setTimeout(function reset(){
+        space.remove("in-route");
         space.add("available");
-      }
+      },10000);
     }
     (function(){
-      var index = 1;
-      var id = 1;
-      park(id,index);
+      digitalRead(1,'output-1');
+      var x = document.getElementById('output-1').innerHTML;
+      if(x==on){
+        var space = document.getElementById('1').classList;
+        space.remove("available");space.add("occupied");
+      }else if(x==off){
+        var space = document.getElementById('1').classList;
+        space.remove("occupied");space.add("available");
+      }
       setTimeout(arguments.callee, 3000);
     })();
     (function(){
-      var index = 2;
-      var id = 2;
-      park(id,index);
+      digitalRead(2,'output-2');
+      var x = document.getElementById('output-2').innerHTML;
+      if(x==on){
+        var space = document.getElementById('2').classList;
+        space.remove("available");space.add("occupied");
+      }else if(x==off){
+        var space = document.getElementById('2').classList;
+        space.remove("occupied");space.add("available");
+      }
       setTimeout(arguments.callee, 3000);
     })();
     (function(){
-      var index = 3;
-      var id = 3;
-      park(id,index);
+      digitalRead(3,'output-3');
+      var x = document.getElementById('output-3').innerHTML;
+      if(x==on){
+        var space = document.getElementById('3').classList;
+        space.remove("available");space.add("occupied");
+      }else if(x==off){
+        var space = document.getElementById('3').classList;
+        space.remove("occupied");space.add("available");
+      }
       setTimeout(arguments.callee, 3000);
     })();
     (function(){
-      var index = 4;
-      var id = 4;
-      park(id,index);
+      digitalRead(4,'output-4');
+      var x = document.getElementById('output-4').innerHTML;
+      if(x==on){
+        var space = document.getElementById('4').classList;
+        space.remove("available");space.add("occupied");
+      }else if(x==off){
+        var space = document.getElementById('4').classList;
+        space.remove("occupied");space.add("available");
+      }
       setTimeout(arguments.callee, 3000);
     })();
     </script>
